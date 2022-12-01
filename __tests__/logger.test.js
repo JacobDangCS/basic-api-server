@@ -17,14 +17,9 @@ describe('Logger middleware', () => {
         consoleSpy.mockRestore();
     });
 
-    it('adds a timestamp', () => {
-        logger(req, res, next);
-        expect(typeof(req.query)).toEqual('object');
-    });
-
     it('logs as expected', () => {
         logger(req, res, next);
-        expect(consoleSpy).toHaveBeenCalledWith('logs'), req.query;
+        expect(consoleSpy).toHaveBeenCalledWith('logs', req.query);
     });
 
     it('calls next as expected', () => {
