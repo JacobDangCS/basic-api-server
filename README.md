@@ -9,7 +9,7 @@ Building a REST API using Express. Must utilize endpoints that perform CRUD oper
 
 ### Links & Resources
 {GitHub Actions} {URL}
-{Deployed Database} {}
+{Deployed Database} {https://lab3-basic-api-server.onrender.com/}
 
 see '.env.sample'
 
