@@ -11,11 +11,13 @@ const notFound = require('./handlers/404');
 const errorHandler = require('./handlers/500');
 const PORT = process.env.PORT || 3001
 const playerRouter = require('./routes/players');
+const questRouter = require('./routes/quests');
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(playerRouter);
+app.use(questRouter);
 
 
 //Root route for QOL
