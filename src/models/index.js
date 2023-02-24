@@ -27,19 +27,16 @@ const sqlDatabase = new Sequelize(DATABASE_URL, {
     },
 });
 
+const PlayerModel = playerSchema(sqlDatabase, DataTypes);
+const QuestModel = questSchema(sqlDatabase, DataTypes);
+
 //relations between players and quests
 PlayerModel.hasMany(QuestModel);
-OrderModel.belongTo(PlayerModel);
-
-// Whiteboard differs from code
-//Implement RPG Schema
-
-const PlayerModel = playerSchema(sqlDatabase, DataTypes);
-const QuestModel = orderSchema(sqlDatabase, DataTypes);
+QuestModel.belongsTo(PlayerModel);
 
 module.exports = {
     sqlDatabase,
     PlayerModel,
-    customerInterface: new ModelInterface(PlayerModel),
+    playerInterface: new ModelInterface(PlayerModel),
     questInterface: new ModelInterface(QuestModel),
 };

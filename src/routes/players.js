@@ -7,7 +7,7 @@ const express = require('express');
 
 //Remove PlayerModel after finishing DELETE Interface
 const { PlayerModel } = require('../models/index');
-const { playerInterface, questInterface} = require('..//models')
+const { playerInterface, questInterface} = require('../models')
 
 const router = express.Router();
 
@@ -34,16 +34,16 @@ router.get('/players/:id', async (req, res, next) => {
     }
 });
 
-route.get('/playersWithQuests/:id', async(req, res, next) => {
+router.get('/playersWithQuests/:id', async(req, res, next) => {
     let id = req.params.id;
     const playerWithQuests = await playerInterface.readManyToOne(id, questInterface.model);
-    res.status(200).send(playerWithQuests);3
+    res.status(200).send(playerWithQuests);
 })
 
 //Retrieves all players
 router.get('/players', async (req, res, next) => {
     try {
-        const player = await customerInterface.read();
+        const player = await playerInterface.read();
         res.status(200).send(player);
     } catch (error) {
         next(error);

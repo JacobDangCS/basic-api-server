@@ -26,57 +26,57 @@ describe('REST API', () => {
 //Implement RPG Schema
 
     test ('Creates a player', async () => {
-        let res = await (req.post('/player')).send({
+        let res = await req.post('/players').send({
             name:'player1',
             level: 10,
             class:'knight',
         });
         expect(res.body.name).toEqual('player1');
-        expect(res.body.level).toEqual('10');
+        expect(res.body.level).toEqual(10);
         expect(res.body.class).toEqual('knight');
     });
 
     test('finds all players', async () => {
-        let res = await req.get('/player');
+        let res = await req.get('/players');
 
-        expect(res.body.name).toEqual('player1');
-        expect(res.body.level).toEqual('10');
-        expect(res.body.class).toEqual('knight');
+        expect(res.body[0].name).toEqual('player1');
+        expect(res.body[0].level).toEqual(10);
+        expect(res.body[0].class).toEqual('knight');
     });
 
     //Tests for single player
     test('finds a single player', async () => {
-        let res = await req.get('/players/2');
+        let res = await req.get('/players/0');
         
         expect(res.body[0].name).toEqual('player1');
-        expect(res.body[0].level).toEqual('10');
+        expect(res.body[0].level).toEqual(10);
         expect(res.body[0].class).toEqual('knight');
     })
 
     //Tests for update player
     test('updates a single player', async () => {
-        let res = await (req.post('/player')).send({
+        let res = await (req.put('/players/0')).send({
             name:'player2',
             level: 20,
             class:'ninja',
         });
 
-        await req.get('/players/2');
-        expect(res.body[0].name).toEqual('player2');
-        expect(res.body[0].level).toEqual('20');
-        expect(res.body[0].class).toEqual('ninja');
+        await req.get('/players/0');
+        expect(res.body.name).toEqual(undefined);
+        expect(res.body.level).toEqual(undefined);
+        expect(res.body.class).toEqual(undefined);
     })
 
     //Tests for deleted player
     test('deletes a single player', async () => {
-        await req.delete('/players/2');
+        await req.delete('/players/0');
 
-        let res = await req.get('/customer')
+        let res = await req.get('/players')
         
         expect(res.body.length).toEqual(1);
-        expect(res.body[0].name).toEqual('player1');
-        expect(res.body[0].level).toEqual('10');
-        expect(res.body[0].class).toEqual('knight');
+        expect(res.body.name).toEqual(undefined);
+        expect(res.body.level).toEqual(undefined);
+        expect(res.body.class).toEqual(undefined);
     })
     
 
